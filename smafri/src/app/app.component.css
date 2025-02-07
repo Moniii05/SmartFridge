@@ -1,4 +1,14 @@
-h1 {
+/* Container für das Bild und die Überschrift */
+.container {
+    display: grid;
+    grid-template-columns: auto 350px; /* 2 Spalten: Text und Bild */
+    align-items: center; /* Vertikale Ausrichtung der Elemente */
+    gap: 20px; /* Abstand zwischen den Elementen */
+  }
+
+
+.container h1 {
+    font-size: 2rem; 
     color: blue;
     font-family: 'Roboto', sans-serif;
   }
