@@ -4,6 +4,12 @@
 <div class="container">
   <img src="assets/kühlschrank.GIF" alt="fridge" style="width:450px" />
   <h1> SmartFridge</h1>
+
+  <!-- Button zum Anzeigen des Formulars -->
+<button (click)="toggleAddProductForm()">Produkt hinzufügen</button>
+
+<!-- Die Standalone-Komponente einbinden -->
+<app-add-product></app-add-product>
 </div>
 <router-outlet />
 

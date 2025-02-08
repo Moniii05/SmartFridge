@@ -1,0 +1,16 @@
+/* Beispiel-CSS für das Formular */
+.product-form {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .product-form label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+  }
+  
