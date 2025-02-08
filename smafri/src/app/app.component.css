@@ -1,14 +1,18 @@
 /* Container für das Bild und die Überschrift */
 .container {
     display: grid;
-    grid-template-columns: auto 350px; /* 2 Spalten: Text und Bild */
-    align-items: center; /* Vertikale Ausrichtung der Elemente */
-    gap: 20px; /* Abstand zwischen den Elementen */
+    grid-template-columns: repeat(6, 1fr); /* 6 Spalten gleiche Breite*/
+   /* align-items: center; /* Vertikale Ausrichtung der Elemente */
+    grid-gap: 10px; /* Abstand zwischen den Elementen */
+    grid-auto-rows: minmax(100px, auto);
   }
 
 
 .container h1 {
-    font-size: 2rem; 
+    grid-column: 2;
+    text-align: left;
+    align-self: start;
+    font-size: 3rem; 
     color: blue;
     font-family: 'Roboto', sans-serif;
   }
