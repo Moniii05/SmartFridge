@@ -9,7 +9,9 @@
 <button (click)="toggleAddProductForm()">Produkt hinzufügen</button>
 
 <!-- Die Standalone-Komponente einbinden -->
-<app-add-product *ngIf="showAddProductForm"></app-add-product>
+<!--  *ngIf="showAddProductForm"  -->
+<!-- <p>Formular sichtbar: {{ showAddProductForm }}</p> -->
+<app-add-product *ngIf="showAddProductForm" ></app-add-product>
 </div>
 <router-outlet />
 

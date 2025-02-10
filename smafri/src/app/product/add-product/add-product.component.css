@@ -15,7 +15,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: block; /* Ersetze flex mit block */
     margin-top: 20px;
-    width: 100%; /* Oder eine feste Breite wie 300px */
+    width: 100%; 
   }
   
 
@@ -24,4 +24,8 @@
     flex-direction: column;
     font-weight: bold;
   }
-  
+
+  :host {
+    display: block; /* Sicherstellen, dass die Komponente sichtbar ist */
+    width: 100%;
+}

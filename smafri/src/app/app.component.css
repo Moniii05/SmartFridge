@@ -5,6 +5,7 @@
    /* align-items: center; /* Vertikale Ausrichtung der Elemente */
     grid-gap: 10px; /* Abstand zwischen den Elementen */
     grid-auto-rows: minmax(100px, auto);
+    overflow: auto;
   }
 
 .container h1 {
@@ -17,7 +18,7 @@
   }
 
   button {
-    grid-column: 3; 
+    grid-column: 2/3; 
     padding: 10px 20px;
     font-size: 16px;
     background-color: #007bff;
@@ -27,16 +28,4 @@
     cursor: pointer;
   }
   
-  .product-form {
-    grid-column: 4 / 7; 
-    background-color: #f0f0f0;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: block;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-top: 20px;
-    width: 100%;
-  }
   

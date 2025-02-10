@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common'; // Importiere CommonModule für 
 })
 export class AddProductComponent {
   // Variable, die steuert, ob Formular angezeigt wird
-  showAddProductForm = false;
+  showAddProductForm = true;
 
   // Objekt für neue Produkt
   newProduct = { name: '', amount: 0 };
@@ -22,7 +22,7 @@ export class AddProductComponent {
   toggleAddProductForm() {
     this.showAddProductForm = !this.showAddProductForm;
     console.log('showAddProductForm:', this.showAddProductForm);  // Debugging: Überprüfen, ob der Wert richtig umgeschaltet wird
-
+    alert(`Formular anzeigen: ${this.showAddProductForm}`);
   }
 
   // Speichert neue Produkt
