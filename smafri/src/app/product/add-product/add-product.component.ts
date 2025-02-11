@@ -1,17 +1,20 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // Importiere FormsModule für ngModel
-//import { CommonModule } from '@angular/common'; // Importiere CommonModule für ngIf
 import { CommonModule } from '@angular/common'; // Importiere CommonModule für ngIf und andere Direktiven
-
+import { ElementRef } from '@angular/core';
+import { AfterViewInit } from '@angular/core';
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-add-product',
-  standalone: true,  // Behalte standalone: true
+  standalone: true, 
   imports: [FormsModule, CommonModule], // Füge FormsModule hier hinzu
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.css'] // Korrektur: styleUrls statt styleUrl
 })
-export class AddProductComponent {
+export class AddProductComponent implements AfterViewInit{
+  @ViewChild('draggable') draggable!: ElementRef;
+
   // Variable, die steuert, ob Formular angezeigt wird
   showAddProductForm = true;
 
@@ -25,6 +28,30 @@ export class AddProductComponent {
     alert(`Formular anzeigen: ${this.showAddProductForm}`);
   }
 
+  ngAfterViewInit() {
+    this.makeDraggable(this.draggable.nativeElement);
+  }
+
+  makeDraggable(element: HTMLElement) {
+    let offsetX = 0, offsetY = 0, isDragging = false;
+
+    const handle = document.getElementById("drag-handle");
+    if (!handle) return;
+
+    handle.onmousedown = (event) => {
+      isDragging = true;
+      offsetX = event.clientX - element.offsetLeft;
+      offsetY = event.clientY - element.offsetTop;
+      document.onmousemove = (e) => {
+        if (isDragging) {
+          element.style.left = e.clientX - offsetX + "px";
+          element.style.top = e.clientY - offsetY + "px";
+        }
+      };
+      document.onmouseup = () => (isDragging = false);
+    };
+  }
+
   // Speichert neue Produkt
   saveProduct() {
     console.log('Produkt speichern:', this.newProduct);
@@ -33,4 +60,6 @@ export class AddProductComponent {
     this.newProduct = { name: '', amount: 0 };
    //this.showAddProductForm = false;
   }
+
+
 }

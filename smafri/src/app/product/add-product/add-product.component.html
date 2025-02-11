@@ -1,10 +1,19 @@
-
-
-
 <!-- Eingabeformular, das angezeigt wird, wenn showAddProductForm true ist -->
+<!-- <div *ngIf="showAddProductForm" class="product-form">
+    <label>
+      Produktname:
+      <input type="text" placeholder="Produktname" [(ngModel)]="newProduct.name" />
+    </label>
+    <label>
+      Menge (g oder Portionen):
+      <input type="number" placeholder="Menge" [(ngModel)]="newProduct.amount" />
+    </label>
+    <button (click)="saveProduct()">Speichern</button>
+  </div> -->
 
-
-<div *ngIf="showAddProductForm" class="product-form">
+  <!-- damit Produkt hinzufügen Formular verschiebbar -->
+  <div *ngIf="showAddProductForm" #draggable class="product-form" id="draggable">
+    <div id="drag-handle">⬆ Zieh mich!</div>  
     <label>
       Produktname:
       <input type="text" placeholder="Produktname" [(ngModel)]="newProduct.name" />
@@ -15,3 +24,4 @@
     </label>
     <button (click)="saveProduct()">Speichern</button>
   </div>
+  
