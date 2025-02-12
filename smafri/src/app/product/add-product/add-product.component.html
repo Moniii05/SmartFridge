@@ -14,14 +14,28 @@
   <!-- damit Produkt hinzufügen Formular verschiebbar -->
   <div *ngIf="showAddProductForm" #draggable class="product-form" id="draggable">
     <div id="drag-handle">⬆ Zieh mich!</div>  
-    <label>
-      Produktname:
-      <input type="text" placeholder="Produktname" [(ngModel)]="newProduct.name" />
+    <label> Produktname:
+      <input type="text" placeholder="Produktname" [(ngModel)]="newProduct.name" required />
     </label>
-    <label>
-      Menge (g oder Portionen):
-      <input type="number" placeholder="Menge" [(ngModel)]="newProduct.amount" />
+
+    <div class="form-row">
+    <label> Menge:
+      <input type="number" placeholder="Menge" [(ngModel)]="newProduct.amount" required />
     </label>
+
+    <label>Einheit:
+        <select [(ngModel)]="newProduct.unit">
+            <option value="g"> Gramm (g) </option>
+            <option value="ml"> Milliliter (ml)</option>
+        </select>
+      </label>
+    </div>
+  
+
+    <label> Verfallsdatum:
+        <input type="date" [(ngModel)]="newProduct.expiryDate" required />
+    </label>
+
     <button (click)="saveProduct()">Speichern</button>
   </div>
   

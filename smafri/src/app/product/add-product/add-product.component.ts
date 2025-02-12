@@ -19,7 +19,7 @@ export class AddProductComponent implements AfterViewInit{
   showAddProductForm = true;
 
   // Objekt für neue Produkt
-  newProduct = { name: '', amount: 0 };
+  newProduct = { name: '', amount: null, unit: 'g', expiryDate: '' };
 
   // Schaltet Formular zum Hinzufügen Produkts ein/aus
   toggleAddProductForm() {
@@ -57,7 +57,7 @@ export class AddProductComponent implements AfterViewInit{
     console.log('Produkt speichern:', this.newProduct);
 
     // Formular zurücksetzen & ausblenden
-    this.newProduct = { name: '', amount: 0 };
+    this.newProduct = { name: '', amount: null, unit: 'g', expiryDate: ''};
    //this.showAddProductForm = false;
   }
 
