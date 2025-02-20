@@ -1,0 +1,12 @@
+<h2>Produkte aktualisieren</h2>
+<div class="product-container">
+    <div class="product-card" *ngFor="let product of products" (click)="editProduct(product)">
+        <div class="card-content">
+          <h3>{{ product.name }}</h3>
+          <p>Menge: {{ product.amount }} {{ product.unit }}</p>
+          <p>Ablaufdatum: {{ product.expiryDate }}</p>
+        </div>
+        <!-- Pfeil, der beim Hover eingeblendet wird -->
+        <div class="hover-arrow">➔</div>
+      </div>
+</div>

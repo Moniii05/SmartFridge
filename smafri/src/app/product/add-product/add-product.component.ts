@@ -5,6 +5,8 @@ import { ElementRef } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
 
+
+
 @Component({
   selector: 'app-add-product',
   standalone: true, 
@@ -29,8 +31,13 @@ export class AddProductComponent implements AfterViewInit{
   }
 
   ngAfterViewInit() {
-    this.makeDraggable(this.draggable.nativeElement);
+    if (this.draggable) {
+      this.makeDraggable(this.draggable.nativeElement);
+    } else {
+      console.warn('Draggable Element wurde nicht gefunden');
+    }
   }
+
 
   makeDraggable(element: HTMLElement) {
     let offsetX = 0, offsetY = 0, isDragging = false;
