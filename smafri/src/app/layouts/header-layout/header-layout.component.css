@@ -1,0 +1,48 @@
+/* Container für das Bild und die Überschrift */
+.container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); 
+    align-items: start; /* Elemente nach oben ausrichten */
+    gap: 10px; 
+    padding: 20px; 
+  /* grid-auto-rows: minmax(100px, auto);
+    overflow: auto; */
+  }
+
+.text-container {  /* h1 mit button mithilfe Flexbox mehr kontrolle */
+    grid-column: 2 / 7; /* Von Spalte 2 bis 6 */
+    display: flex;
+    flex-direction: column; /* Elemente untereinander anordnen */
+    align-items: start; /* Links ausrichten */
+    gap: 10px;
+}
+
+.text-container h1 {
+   /*  grid-column: 2;
+    text-align: left;
+    align-self: start; */
+    margin: 0;
+    font-size: 3rem; 
+    color: #0c6ee6;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .button-container {
+    display: flex;
+    gap: 10px; /* Abstand zwischen Buttons */
+    flex-wrap: wrap; /* Falls zu viele Buttons, in nächste Zeile umbrechen */
+  }
+
+  .button-container button {
+  /*  grid-column: 2; 
+    grid-row: 1;  /* Lsg. damit button neben bild sein kann */
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #0c6ee6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  

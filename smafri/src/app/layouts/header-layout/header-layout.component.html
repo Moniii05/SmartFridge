@@ -1,0 +1,22 @@
+<p>header-layout works!</p>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<div class="header">
+    <img src="assets/kühlschrank-no-background.png" alt="fridge" style="width:450px" />
+    <div class="text-container">
+    <h1> SmartFridge</h1>
+
+    <!-- Button zum Anzeigen des Formulars -->
+     <div class="button-container">
+  <button (click)="toggleAddProductForm()">Produkt hinzufügen</button> 
+  <button routerLink="/update-product">Produkt aktualisieren</button>
+     </div>
+  <!-- Die Standalone-Komponente einbinden -->
+  <!-- <p>Formular sichtbar: {{ showAddProductForm }}</p> -->
+  <app-add-product *ngIf="showAddProductForm" ></app-add-product>
+   </div>
+  </div>
+  
+  <router-outlet></router-outlet>
+  
+  
+  

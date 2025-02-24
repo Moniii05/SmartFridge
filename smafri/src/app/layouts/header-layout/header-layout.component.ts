@@ -1,0 +1,36 @@
+import { Component } from '@angular/core';
+import { RouterOutlet, RouterLink } from '@angular/router';
+import { AddProductComponent } from '../../product/add-product/add-product.component';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-header-layout',
+  imports: [RouterOutlet, RouterLink, AddProductComponent, FormsModule, CommonModule],
+  template: `
+    <div class="header">
+      <img src="assets/kühlschrank-no-background.png" alt="fridge" style="width:450px" />
+      <div class="text-container">
+        <h1>SmartFridge</h1>
+        <div class="button-container">
+          <!-- Toggle-Button für Produkt hinzufügen -->
+          <button (click)="toggleAddProductForm()">Produkt hinzufügen</button>
+          <!-- Button für Produkt aktualisieren -->
+          <button routerLink="/update-product">Produkt aktualisieren</button>
+        </div>
+        <!-- Formular wird nur angezeigt, wenn showAddProductForm true ist -->
+        <app-add-product *ngIf="showAddProductForm"></app-add-product>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+  `,
+  styleUrls: ['./header-layout.component.css']
+})
+export class HeaderLayoutComponent {
+  showAddProductForm = false;
+
+  toggleAddProductForm() {
+    this.showAddProductForm = !this.showAddProductForm;
+    console.log('Formular sichtbar:', this.showAddProductForm);
+  }
+}

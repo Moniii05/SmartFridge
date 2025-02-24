@@ -12,6 +12,7 @@
     border-radius: 10px;
     cursor: pointer;
     transition: box-shadow 0.3s ease;
+    font-family: 'Roboto', sans-serif;
   }
 
   .product-card:hover {
