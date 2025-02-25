@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 
 import { ActivatedRoute } from '@angular/router'; // für AddproductComponent nutzen können 
 
@@ -15,7 +17,7 @@ interface Product {
 @Component({
   selector: 'app-update-product',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './update-product.component.html',
   styleUrls: ['./update-product.component.css']
 })
@@ -50,12 +52,22 @@ export class UpdateProductComponent implements OnInit {
     };
   }
   }
-// Navigiert zum Bearbeitungsformular, indem die Produkt-ID als Parameter übergeben wird
-editProduct(product: Product): void {
-  this.router.navigate(['/update-product', product.id]);
+
+ showUpdateForm = false;
+ selectedProduct: any = {}; 
+ 
+ editProduct(product: any) {
+   this.selectedProduct = { ...product }; // Produkt-Daten ins Formular kopieren
+   this.showUpdateForm = true;
  }
-
-
+ 
+ closeUpdateForm() {
+   this.showUpdateForm = false;
+ }
+ 
+updateProduct() {
+  console.log('Produkt wurde aktualisiert:', this.selectedProduct);
+}
 
 }
 
