@@ -1,7 +1,10 @@
+
+
 .product-container {
     display:flex;
     flex-wrap: wrap;
     gap: 20px;
+    padding-left: 20px;
 }
 
 .product-card {
@@ -13,6 +16,7 @@
     cursor: pointer;
     transition: box-shadow 0.3s ease;
     font-family: 'Roboto', sans-serif;
+    padding-left: 20px;
   }
 
   .product-card:hover {
@@ -33,3 +37,5 @@
   .product-card:hover .hover-arrow {
     opacity: 1;
   }
+
+  

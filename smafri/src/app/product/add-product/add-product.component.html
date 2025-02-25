@@ -13,7 +13,15 @@
 
   <!-- damit Produkt hinzufügen Formular verschiebbar -->
   <div *ngIf="showAddProductForm" #draggable class="product-form" id="draggable">
-    <div id="drag-handle">⬆ Zieh mich!</div>  
+    
+    <!-- <div id="drag-handle">⬆ Zieh mich!</div> -->
+
+    <div class="form-header" id="drag-handle">
+      <h3>⬆ Zieh mich!</h3>
+      <button class="close-btn" (click)="closeForm()">✖</button>
+  </div>
+
+
     <label> Produktname:
       <input type="text" placeholder="Produktname" [(ngModel)]="newProduct.name" required />
     </label>

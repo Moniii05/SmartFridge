@@ -45,6 +45,7 @@
     font-size: 16px;
     border-radius: 5px 5px 0 0;
     color: white;
+
   }
 
    #draggable {
@@ -72,4 +73,31 @@
     align-items: center;
     gap: 5px;
     cursor: pointer;
+}
+
+.form-header {
+  position: relative;
+  background-color: #0c6ee6; 
+  color: white;
+  padding: 5px;
+  text-align: center;
+  font-weight: bold;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.close-btn:hover {
+  color: red;
 }

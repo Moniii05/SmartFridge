@@ -68,5 +68,9 @@ export class AddProductComponent implements AfterViewInit{
    //this.showAddProductForm = false;
   }
 
+  closeForm() {
+    this.showAddProductForm = false;
+}
+
 
 }

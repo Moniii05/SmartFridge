@@ -54,5 +54,8 @@ export class UpdateProductComponent implements OnInit {
 editProduct(product: Product): void {
   this.router.navigate(['/update-product', product.id]);
  }
+
+
+
 }
 
