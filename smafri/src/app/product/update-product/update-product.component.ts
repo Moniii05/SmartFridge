@@ -67,6 +67,7 @@ export class UpdateProductComponent implements OnInit {
  
 updateProduct() {
   console.log('Produkt wurde aktualisiert:', this.selectedProduct);
+  this.showUpdateForm = false;
 }
 
 }
