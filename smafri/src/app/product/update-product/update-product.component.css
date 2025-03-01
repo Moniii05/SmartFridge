@@ -1,8 +1,8 @@
 
-
+/* Produktliste */
 .product-container {
-    display:flex;
-    flex-wrap: wrap;
+    display:flex; /* Produkte nebeneinander */
+    flex-wrap: wrap; /* falls platz nciht reicht, geht in nächste Zeile */
     gap: 20px;
     padding-left: 20px;
 }
@@ -11,31 +11,32 @@
     position: relative;
     width: 200px;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: box-shadow 0.3s ease;
+    border: 1px solid #ccc; /* grauer Rahmen */
+    border-radius: 10px; /* abgerundet Rahmen */
+    cursor: pointer; /* zeigt an, dass Kasten klickbar ist */
+    transition: box-shadow 0.3s ease; 
     font-family: 'Roboto', sans-serif;
     padding-left: 20px;
   }
 
   .product-card:hover {
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    /* schatten drüberfahren */
   }
 
   .hover-arrow {
     position: absolute;
     right: 10px;
     top: 50%;
-    transform: translateY(-50%);
-    opacity: 0;
+    transform: translateY(-50%); /* mittige ausrichtung */
+    opacity: 0; /* unsichtbar */
     transition: opacity 0.3s ease;
     font-size: 20px;
     color: #0c6ee6;
   }
 
   .product-card:hover .hover-arrow {
-    opacity: 1;
+    opacity: 1; /* pfeil wird bei hover sichtbar */
   }
 
   /* Hintergrund-Overlay */
@@ -49,6 +50,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 100; /* stellt sicher, dass overlay über kasten liegt */
   }
   
   /* Das eigentliche Formular */
@@ -58,8 +60,9 @@
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     width: 300px;
-    position: relative;
-    position: fixed; /* damit über andere Inhalte steht */
+   /* position: relative; */
+    position: relative; 
+    z-index: 101; /* Über alles andere legen */
   }
   
   /* Schließen-Button */
