@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import{AfterViewInit, ViewChild, ElementRef} from '@angular/core';
 
+import { RouterLink } from '@angular/router';
+
+
 
 
 interface Product {
@@ -17,7 +20,7 @@ interface Product {
 @Component({
   selector: 'app-update-product',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,RouterLink],
   templateUrl: './update-product.component.html',
   styleUrls: ['./update-product.component.css']
 })

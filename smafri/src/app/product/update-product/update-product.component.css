@@ -127,6 +127,41 @@
     margin-bottom: 10px;
   }
 
+  /* Header-Bereich oben */
+.update-header {
+    display: flex;               /* Flexbox, damit Überschrift, Button nebeneinander liegen */
+    justify-content: space-between; /* Platz zw Überschrift, Button */
+    align-items: center;         /* Vertikal zentriert */
+    padding: 10px 20px;          /* Außenabstand (oben/unten, links/rechts) */
+    background-color: #f0f0f0;   /* Leichter Hintergrund, optional */
+    margin-bottom: 10px;         /* Kleiner Abstand zum Rest der Seite */
+  }
+  
+  
+  .update-header h2 {
+    margin: 0;                   /* Keine zusätzlichen Abstände */
+    font-size: 2rem;
+    color: #0c6ee6;             
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  /* Zurück-Button */
+  .back-btn {
+    background: none;
+    border: none;
+    color: #0c6ee6;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 5px;
+  }
+  
+  /* Hover-Effekt */
+  .back-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+
  /* .update-form input,
 .update-form select {
   padding: 8px;

@@ -5,10 +5,9 @@ import { HeaderLayoutComponent } from './layouts/header-layout/header-layout.com
 import { PlainLayoutComponent } from './layouts/plain-layout/plain-layout.component';
 
 export const routes: Routes = [
-  // add product
-  {
-    path: '',
-    component: HeaderLayoutComponent,
+  
+  { path: '', 
+    component: HeaderLayoutComponent ,
     children: [
       // hier weitere Routen unterbringen, die Header benötigen
     

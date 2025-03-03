@@ -1,4 +1,9 @@
-<h2>Produkte aktualisieren</h2>
+<!-- Oberer Header-Bereich mit Überschrift (links) und Zurück-Button (rechts) -->
+<div class="update-header">
+  <h2>Produkte aktualisieren</h2>
+  <button class="back-btn" routerLink="/" title="Zurück">← Zurück</button>
+</div>
+
 <div class="product-container">
     <div class="product-card" *ngFor="let product of products" (click)="editProduct(product)">
         <div class="card-content">
