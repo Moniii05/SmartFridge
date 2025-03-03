@@ -29,30 +29,43 @@ export class UpdateProductComponent implements AfterViewInit {
     // ...
   ];
  
-
- /* constructor(private route:ActivatedRoute, private router: Router) {} */
  constructor() {}
 
+ // Private Variable und Setter für showUpdateForm:
+ private _showUpdateForm = false;
+ get showUpdateForm() {
+   return this._showUpdateForm;
+ }
+ set showUpdateForm(value: boolean) {
+   this._showUpdateForm = value;
+   if (value) {
+     // Nach kurzem Delay sicherstellen, dass das Formular im DOM ist
+     setTimeout(() => {
+       if (this.draggable) {
+         this.makeDraggable(this.draggable.nativeElement);
+       } else {
+         console.warn('Draggable Element nicht gefunden (im Setter)');
+       }
+     }, 0);
+   }
+ }
 
- showUpdateForm = false;
  selectedProduct: Product = { id: 0, name: '', amount: 0, unit: '', expiryDate: '' };
 
   // Für Drag-and-Drop: Referenz auf das draggabare Formular-Element
   @ViewChild('draggable') draggable!: ElementRef;
 
-  // Wird aufgerufen, nachdem die View initialisiert wurde, um das Formular verschiebbar zu machen
+  
+  // Da das Formular erst später erscheint, braucht ngAfterViewInit hier nichts weiter zu tun
   ngAfterViewInit() {
-    if (this.draggable) {
-      this.makeDraggable(this.draggable.nativeElement); // Drag-Funktion initialisieren
-    } else {
-      console.warn('Draggable Element nicht gefunden');
-    }
+    // Bei Add-Formular war kein Problem, da showAddProductForm true war
+    // Hier wird Draggable-Initialisierung über Setter von showUpdateForm ausgeführt
   }
 
  editProduct(product: Product) {
   console.log("Produkt zum Bearbeiten:", product);
    this.selectedProduct = { ...product }; // Produkt-Daten ins Formular kopieren
-   this.showUpdateForm = true; //Overlay
+   this.showUpdateForm = true; //Overlay Setter ruft makeDraggable auf
  }
  
  // schließt Overlay
@@ -65,10 +78,10 @@ updateProduct() {
   this.showUpdateForm = false;
 }
 
-// Drag-and-Drop-Funktion (kopiert und angepasst von deinem Add-Product-Code)
+// Drag-and-Drop-Funktion (kopiert & angepasst von Add-Product-Code)
 makeDraggable(element: HTMLElement) {
   let offsetX = 0, offsetY = 0, isDragging = false;
-  // Suche das Element mit id "drag-handle" als Griff für das Ziehen
+  // Suche Element mit id "drag-handle" als Griff für Ziehen
   const handle = document.getElementById("drag-handle");
   if (!handle) return;
   handle.onmousedown = (event) => {
@@ -84,7 +97,6 @@ makeDraggable(element: HTMLElement) {
     };
     document.onmouseup = () => (isDragging = false);
   };
-}
-
+ }
 }
 
