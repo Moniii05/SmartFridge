@@ -1,10 +1,9 @@
 import { Component} from '@angular/core';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-
-import { ActivatedRoute } from '@angular/router'; // für AddproductComponent nutzen können 
+// import { ActivatedRoute } from '@angular/router'; // für AddproductComponent nutzen können 
 
 interface Product {
   id:number;
@@ -30,7 +29,8 @@ export class UpdateProductComponent {
   ];
  
 
-  constructor(private route:ActivatedRoute, private router: Router) {}
+ /* constructor(private route:ActivatedRoute, private router: Router) {} */
+ constructor() {}
 
 
  showUpdateForm = false;
