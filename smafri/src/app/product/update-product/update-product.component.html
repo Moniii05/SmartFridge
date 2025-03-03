@@ -11,31 +11,37 @@
       </div>
 </div>
 
-<!-- Formular wird als Overlay angezeigt -->
+<!-- Formular wird als Overlay angezeigt, nur wenn showUpdateForm true -->
 <div *ngIf="showUpdateForm" class="overlay">
-    <div class="update-form">
+    <div #draggable class="update-form">
+   <!-- <div class="update-form"> -->
+    <div class="form-header" id="drag-handle">
+      <h3>⬆ Zieh mich!</h3>
       <button class="close-btn" (click)="closeUpdateForm()">X</button>
-      <h3>Produkt bearbeiten</h3>
-  
+</div>
+
+
+      <!-- Formularfelder, mit ngModel an selectedProduct gebunden -->
       <label>Produktname:
-        <input type="text" [(ngModel)]="selectedProduct.name" />
+        <input type="text" [(ngModel)]="selectedProduct.name" required />
       </label>
   
       <label>Menge:
-        <input type="number" [(ngModel)]="selectedProduct.amount" />
+        <input type="number" [(ngModel)]="selectedProduct.amount" required />
       </label>
   
       <label>Einheit:
-        <select [(ngModel)]="selectedProduct.unit">
+        <select [(ngModel)]="selectedProduct.unit" required>
           <option value="g">Gramm (g)</option>
           <option value="ml">Milliliter (ml)</option>
+          <option value = "Stück">Stück</option>
         </select>
       </label>
   
       <label>Verfallsdatum:
-        <input type="date" [(ngModel)]="selectedProduct.expiryDate" />
+        <input type="date" [(ngModel)]="selectedProduct.expiryDate" required />
       </label>
   
       <button (click)="updateProduct()">Speichern</button>
     </div>
-  </div>
+ 

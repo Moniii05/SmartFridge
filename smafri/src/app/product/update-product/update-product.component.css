@@ -16,7 +16,7 @@
     cursor: pointer; /* zeigt an, dass Kasten klickbar ist */
     transition: box-shadow 0.3s ease; 
     font-family: 'Roboto', sans-serif;
-    padding-left: 20px;
+   /* padding-left: 20px; */
   }
 
   .product-card:hover {
@@ -55,15 +55,34 @@
   
   /* Das eigentliche Formular */
   .update-form {
-    background: white;
+    background-color: #f0f0f0;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    width: 300px;
-   /* position: relative; */
-    position: relative; 
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 320px;
+    position: absolute;  /* verschiebbar machen */
     z-index: 101; /* Über alles andere legen */
+    cursor: grab;
+    font-family: 'Roboto', sans-serif;
+    top: 50px; 
+    left: 50px;
+    cursor: grab;
   }
+
+  /* Header des Formulars (für Drag-and-Drop und Schließen) */
+.form-header {
+    position: relative;       /* Für den Close-Button */
+    background-color: #0c6ee6;  /* Blauer Header */
+    color: white;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
   
   /* Schließen-Button */
   .close-btn {
@@ -71,11 +90,48 @@
     top: 10px;
     right: 10px;
     border: none;
-    background: red;
+    background: none;
     color: white;
-    padding: 5px 10px;
+    padding: 5px;
     cursor: pointer;
     border-radius: 5px;
+    font-size: 18px;
   }
   
+  #drag-handle {
+    background: #007bff;
+    padding: 10px;
+    cursor: grab;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 5px 5px 0 0;
+    color: white;
+
+  }
+
+  .close-btn:hover {
+    color: red;
+}
+
+:host {
+    display: block;
+    width: 100%;
+    font-family: 'Roboto', sans-serif; 
+  }
+
+  .update-form label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+ /* .update-form input,
+.update-form select {
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+  margin-bottom: 10px; /* Optional, falls du etwas Abstand willst 
+} */
   
