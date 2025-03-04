@@ -1,4 +1,8 @@
+<div class="delete-header">
 <h2>Produkt löschen</h2>
+<button class="back-btn" routerLink="/" title="Zurück">← Zurück</button>
+</div>
+
 <div class="product-container">
   <!-- Jede Produktkarte ruft confirmDelete(product) auf -->
   <div class="product-card" *ngFor="let product of products" (click)="confirmDelete(product)">

@@ -109,3 +109,34 @@
     color: white;
   }
   
+  .delete-header {
+    display: flex;
+    justify-content: space-between; /* Überschrift links, Button rechts */
+    align-items: center;           /* Vertikal zentriert */
+    padding: 10px 20px;
+    background-color: #f0f0f0;     /* Optionaler Hintergrund */
+    margin-bottom: 10px;           /* Abstand zu den Kästchen */
+  }
+  
+  .delete-header h2 {
+    margin: 0;
+    font-size: 2rem;
+    color: #0c6ee6;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  /* Zurück-Button (wie bei Update) */
+  .back-btn {
+    background: none;
+    border: none;
+    color: #0c6ee6;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 5px;
+  }
+  
+  .back-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  

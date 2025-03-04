@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
+import { RouterLink } from '@angular/router';
+
 interface Product {
   id: number;
   name: string;
@@ -14,7 +16,7 @@ interface Product {
 @Component({
   selector: 'app-delete-product',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,RouterLink],
   templateUrl: './delete-product.component.html',
   styleUrls: ['./delete-product.component.css']
 })
