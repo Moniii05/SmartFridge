@@ -17,6 +17,8 @@ import { CommonModule } from '@angular/common';
           <button (click)="toggleAddProductForm()">Produkt hinzufügen</button>
           <!-- Button für Produkt aktualisieren -->
           <button routerLink="/update-product">Produkt aktualisieren</button>
+          <button routerLink="/delete-product">Produkt löschen</button>
+
         </div>
         <!-- Formular wird nur angezeigt, wenn showAddProductForm true ist -->
         <app-add-product *ngIf="showAddProductForm"></app-add-product>

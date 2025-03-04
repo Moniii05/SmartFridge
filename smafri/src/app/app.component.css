@@ -31,7 +31,7 @@
   .button-container {
     display: flex;
     gap: 10px; /* Abstand zwischen Buttons */
-    flex-wrap: wrap; /* Falls zu viele Buttons, in nächste Zeile umbrechen */
+    flex-wrap: nowrap; /* Falls zu viele Buttons, in nächste Zeile umbrechen */
   }
 
   .button-container button {
@@ -46,10 +46,16 @@
     cursor: pointer;
   }
 
-  .button-container button:last-child {
-    background-color: darkred; /* Testweise */
+  /* .button-container button:last-child {
+    background-color: darkred; /* Testweise 
     border: 1px solid yellow;
-  }
+  } */
+
+  .button-container button[routerLink="/delete-product"] {
+    background-color: darkred !important;
+    border: 2px solid yellow !important;
+}
+
   
   
   
