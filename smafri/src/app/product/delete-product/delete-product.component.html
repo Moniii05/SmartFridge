@@ -1,0 +1,28 @@
+<h2>Produkt löschen</h2>
+<div class="product-container">
+  <!-- Jede Produktkarte ruft confirmDelete(product) auf -->
+  <div class="product-card" *ngFor="let product of products" (click)="confirmDelete(product)">
+    <div class="card-content">
+      <h3>{{ product.name }}</h3>
+      <p>Menge: {{ product.amount }} {{ product.unit }}</p>
+      <p>Ablaufdatum: {{ product.expiryDate }}</p>
+    </div>
+    <div class="hover-arrow">➔</div>
+  </div>
+</div>
+
+<!-- Bestätigungs-Overlay: Wird angezeigt, wenn showDeleteConfirm true ist -->
+<div *ngIf="showDeleteConfirm" class="overlay">
+  <div class="delete-confirm">
+    <div class="form-header" id="drag-handle">
+      <h3>Sicher löschen?</h3>
+      <button class="close-btn" (click)="closeDeleteConfirm()">X</button>
+    </div>
+    <p>Willst du das Produkt "{{ selectedProduct.name }}" wirklich löschen?</p>
+    <div class="confirm-buttons">
+      <button class="yes-btn" (click)="deleteProduct()">Ja</button>
+      <button class="no-btn" (click)="closeDeleteConfirm()">Nein</button>
+    </div>
+  </div>
+</div>
+

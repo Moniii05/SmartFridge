@@ -3,6 +3,7 @@ import { UpdateProductComponent } from './product/update-product/update-product.
 import { AddProductComponent } from './product/add-product/add-product.component';
 import { HeaderLayoutComponent } from './layouts/header-layout/header-layout.component'; //hinzufügen für seperate Layout 
 import { PlainLayoutComponent } from './layouts/plain-layout/plain-layout.component';
+import { DeleteProductComponent } from './product/delete-product/delete-product.component'; 
 
 export const routes: Routes = [
   
@@ -10,9 +11,9 @@ export const routes: Routes = [
     component: HeaderLayoutComponent ,
     children: [
       // hier weitere Routen unterbringen, die Header benötigen
-    
     ]
   },
+
   {
     path: 'update-product',
     component: PlainLayoutComponent,
@@ -20,5 +21,14 @@ export const routes: Routes = [
       { path: '', component: UpdateProductComponent },
       { path: ':id', component: AddProductComponent } // für Bearbeitungsmodus
     ]
+  },
+
+  {
+    path: 'delete-product',  
+    component: PlainLayoutComponent,
+    children: [
+      { path: '', component: DeleteProductComponent }
+    ]
   }
+
 ];

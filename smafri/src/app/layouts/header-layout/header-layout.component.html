@@ -9,7 +9,8 @@
      <div class="button-container">
   <button (click)="toggleAddProductForm()">Produkt hinzufügen</button> 
   <button routerLink="/update-product">Produkt aktualisieren</button>
-     </div>
+  <button routerLink="/delete-product">Produkt löschen</button>
+</div>
   <!-- Die Standalone-Komponente einbinden -->
   <!-- <p>Formular sichtbar: {{ showAddProductForm }}</p> -->
   <app-add-product *ngIf="showAddProductForm" ></app-add-product>

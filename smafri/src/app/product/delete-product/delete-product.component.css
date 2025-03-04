@@ -1,0 +1,111 @@
+/* Produktliste – identisch zu Update */
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-left: 20px;
+  }
+  
+  .product-card {
+    position: relative;
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .product-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  
+  .hover-arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 20px;
+    color: #0c6ee6;
+  }
+  
+  .product-card:hover .hover-arrow {
+    opacity: 1;
+  }
+  
+  /* Overlay für den Bestätigungsdialog */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+  }
+  
+  /* Bestätigungsdialog */
+  .delete-confirm {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+    position: relative;
+    z-index: 101;
+    text-align: center;
+  }
+  
+  /* Form-Header im Dialog */
+  .form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0c6ee6;
+    color: white;
+    padding: 5px 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  /* Schließen-Button */
+  .close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  /* Bestätigungs-Buttons */
+  .confirm-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+  }
+  
+  .yes-btn, .no-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .yes-btn {
+    background-color: red;
+    color: white;
+  }
+  
+  .no-btn {
+    background-color: #0c6ee6;
+    color: white;
+  }
+  
