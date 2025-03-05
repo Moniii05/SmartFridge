@@ -1,0 +1,30 @@
+
+<div class="product-list-section">
+    <h2>Produktliste</h2>
+    
+    <!-- Suchfeld  -->
+    <div class="search-container">
+      <input type="text" placeholder="Suche..." [(ngModel)]="searchTerm" />
+    </div>
+    
+    <!-- Scroll-Container-Wrapper für Slider-Buttons -->
+    <div class="scroll-container-wrapper">
+      <!-- Linker Slider-Button -->
+      <button class="slider-btn left-btn" (click)="scrollLeft()">&#8249;</button>
+      
+      <!-- Horizontale Scroll-Container -->
+      <div #scrollContainer class="scroll-container">
+        <div class="product-card" *ngFor="let product of filteredProducts">
+          <div class="card-content">
+            <h3>{{ product.name }}</h3>
+            <p>Menge: {{ product.amount }} {{ product.unit }}</p>
+            <p>Ablaufdatum: {{ product.expiryDate }}</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Rechter Slider-Button -->
+      <button class="slider-btn right-btn" (click)="scrollRight()">&#8250;</button>
+    </div>
+  </div>
+  

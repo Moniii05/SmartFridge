@@ -4,6 +4,7 @@ import { AddProductComponent } from './product/add-product/add-product.component
 import { HeaderLayoutComponent } from './layouts/header-layout/header-layout.component'; //hinzufügen für seperate Layout 
 import { PlainLayoutComponent } from './layouts/plain-layout/plain-layout.component';
 import { DeleteProductComponent } from './product/delete-product/delete-product.component'; 
+import { ListProductComponent } from './product/list-product/list-product.component';
 
 export const routes: Routes = [
   
@@ -29,6 +30,10 @@ export const routes: Routes = [
     children: [
       { path: '', component: DeleteProductComponent }
     ]
-  }
+  },
 
+  {
+    path: 'product-list',  // Neue Route für die Produktliste
+    component: ListProductComponent
+  }
 ];
