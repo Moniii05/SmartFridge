@@ -1,3 +1,17 @@
+/* Hauptcontainer: Bild links, Text + Buttons rechts */
+.header {
+  display: flex;
+  align-items: center; /* Alle Elemente vertikal ausrichten */
+  gap: 30px; /* Abstand zwischen Bild und Text-Bereich */
+  padding: 10px 20px; 
+}
+
+/* Bild-Styling */
+.header img {
+  width: 450px;
+  height: auto;
+}
+
 /* Container für das Bild und die Überschrift */
 .container {
     display: grid;
@@ -10,11 +24,11 @@
   }
 
 .text-container {  /* h1 mit button mithilfe Flexbox mehr kontrolle */
-    grid-column: 2 / 7; /* Von Spalte 2 bis 6 */
+    /* grid-column: 2 / 7;  Von Spalte 2 bis 6 */
     display: flex;
     flex-direction: column; /* Elemente untereinander anordnen */
-    align-items: start; /* Links ausrichten */
-    gap: 10px;
+    align-items: flex-start; /* Links ausrichten */
+    gap: 15px;
 }
 
 .text-container h1 {
@@ -30,19 +44,41 @@
   .button-container {
     display: flex;
     gap: 10px; /* Abstand zwischen Buttons */
-    flex-wrap: wrap; /* Falls zu viele Buttons, in nächste Zeile umbrechen */
+    /* flex-wrap: wrap; /* Falls zu viele Buttons, in nächste Zeile umbrechen */
+    flex-direction: column;
   }
 
   .button-container button {
   /*  grid-column: 2; 
     grid-row: 1;  /* Lsg. damit button neben bild sein kann */
-    padding: 10px 20px;
+    padding: 12px 20px;
     font-size: 16px;
     background-color: #0c6ee6;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 200px; /* Einheitliche Button-Breite */
+    text-align: center;
+    transition: background-color 0.3s ease;
   }
+
+  /* Hover-Effekt für Buttons */
+.button-container button:hover {
+  background-color: #085bb5;
+}
+
+/* RESPONSIVE DESIGN - Für kleinere Bildschirme */
+@media (max-width: 768px) {
+  .header {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  }
+
+  .button-container {
+      align-items: center;
+  }
+}
   
  
