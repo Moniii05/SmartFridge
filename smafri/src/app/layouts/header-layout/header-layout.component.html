@@ -15,28 +15,7 @@
   <app-add-product *ngIf="showAddProductForm" ></app-add-product>
    </div>
   </div>
-  
-
-<!--  neue Abschnitt für Produktliste -->
-<div class="product-list-section">
-   <h2>Produktliste</h2>
-   <div class="scroll-container-wrapper">
-     <button class="slider-btn left-btn" (click)="scrollLeft()">&#8249;</button>
-     
-     <!-- Scroll-Container mit *ngFor -->
-     <div #scrollContainer class="scroll-container">
-       <div class="product-card" *ngFor="let product of products">
-         <div class="card-content">
-           <h3>{{ product.name }}</h3>
-           <p>Menge: {{ product.amount }} {{ product.unit }}</p>
-           <p>Ablaufdatum: {{ product.expiryDate }}</p>
-         </div>
-       </div>
-     </div>
  
-     <button class="slider-btn right-btn" (click)="scrollRight()">&#8250;</button>
-   </div>
- </div>
 
  <app-list-product></app-list-product>
 

@@ -3,10 +3,11 @@ import { RouterOutlet, RouterLink } from '@angular/router';
 import { AddProductComponent } from '../../product/add-product/add-product.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ListProductComponent } from '../../product/list-product/list-product.component'; 
 
 @Component({
   selector: 'app-header-layout',
-  imports: [RouterOutlet, RouterLink, AddProductComponent, FormsModule, CommonModule],
+  imports: [RouterOutlet, RouterLink, AddProductComponent, FormsModule, CommonModule, ListProductComponent],
   template: `
     <div class="header">
       <img src="assets/kühlschrank-no-background.png" alt="fridge" style="width:450px" />
