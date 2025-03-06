@@ -11,6 +11,7 @@ interface Product {
 }
 
 @Component({
+  standalone: true,
   selector: 'app-list-product',
   imports: [CommonModule,FormsModule],
   templateUrl: './list-product.component.html',

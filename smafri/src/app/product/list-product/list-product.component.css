@@ -2,6 +2,7 @@
 .product-list-section {
     margin-top: 20px;
     padding: 20px;
+    font-family: 'Roboto', sans-serif;
   }
   
   /* Überschrift */
@@ -52,6 +53,9 @@
     border-radius: 5px;
     width: 200px;
     box-sizing: border-box;
+    border-radius: 10px;       /* abgerundete Ecken */
+    width: 250px;
+    border: 1px solid #ccc;
   }
   
   /* Slider-Buttons */
@@ -84,6 +88,5 @@
   
   :host {
     display: block;
-    border: 2px solid red;
   }
   

@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 import { ListProductComponent } from '../../product/list-product/list-product.component'; 
 
 @Component({
+  standalone: true,
   selector: 'app-header-layout',
   imports: [RouterOutlet, RouterLink, AddProductComponent, FormsModule, CommonModule, ListProductComponent],
   template: `
     <div class="header">
-      <img src="assets/kühlschrank-no-background.png" alt="fridge" style="width:450px" />
+      <img src="assets/kühlschrank-no-background.png" alt="fridge" style="width:500px" />
       <div class="text-container">
         <h1>SmartFridge</h1>
         <div class="button-container">
@@ -25,6 +26,9 @@ import { ListProductComponent } from '../../product/list-product/list-product.co
         <app-add-product *ngIf="showAddProductForm"></app-add-product>
       </div>
     </div>
+
+    <app-list-product></app-list-product>
+
     <router-outlet></router-outlet>
   `,
   styleUrls: ['./header-layout.component.css']
