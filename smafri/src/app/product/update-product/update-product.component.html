@@ -4,9 +4,13 @@
   <button class="back-btn" routerLink="/" title="Zurück">← Zurück</button>
 </div>
 
+<!-- Übersicht: Liste aller Produkte (nur wenn KEINE ID in der URL ist) -->
+<div *ngIf="!this.route.snapshot.paramMap.get('id')">
 <div class="product-container">
-    <div class="product-card" *ngFor="let product of products" (click)="editProduct(product)">
-        <div class="card-content">
+    <div class="product-card" *ngFor="let product of products" (click)="editProduct(product)"> 
+    <!--   <div class="product-card" *ngIf="selectedProduct" (click)="editProduct(product)">  -->
+   <!-- <div class="product-details" *ngIf="selectedProduct"> -->
+      <div class="card-content">
           <h3>{{ product.name }}</h3>
           <p>Menge: {{ product.amount }} {{ product.unit }}</p>
           <p>Ablaufdatum: {{ product.expiryDate }}</p>

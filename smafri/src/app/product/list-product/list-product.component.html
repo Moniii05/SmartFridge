@@ -1,13 +1,25 @@
-
-
 <div class="product-list-section">
     <h2>Produktliste</h2>
     
+     <!-- Sortierleiste -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+
     <!-- Suchfeld  -->
     <div class="search-container">
       <input type="text" placeholder="Suche..." [(ngModel)]="searchTerm" />
     </div>
     
+ <!-- Sortier-Dropdown -->
+ <div class="sort-container w-25">
+    <select class="form-select" [(ngModel)]="sortOption">
+      <option value="alphabetisch">Alphabetisch</option>
+      <option value="mengeAufwaerts">Menge aufwärts</option>
+      <option value="mengeAbwaerts">Menge abwärts</option>
+      <option value="verfallsdatumNah">Verfallsdatum (nah)</option>
+    </select>
+  </div>
+</div>
+
     <!-- Scroll-Container-Wrapper für Slider-Buttons -->
     <div class="scroll-container-wrapper">
       <!-- Linker Slider-Button -->

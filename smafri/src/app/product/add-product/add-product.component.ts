@@ -5,7 +5,8 @@ import { ElementRef } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
 
-
+// Importiere Service 
+import { ProductService, Product } from '../product.service';
 
 @Component({
   selector: 'app-add-product',
@@ -21,7 +22,10 @@ export class AddProductComponent implements AfterViewInit{
   showAddProductForm = true;
 
   // Objekt für neue Produkt
-  newProduct = { name: '', amount: null, unit: 'g', expiryDate: '' };
+  newProduct: Product = { name: '', amount: 0, unit: 'g', expiryDate: '' };
+
+// Injektion ProductService in Konstruktor (direkt nach Imports)
+constructor(private productService: ProductService) {}
 
   // Schaltet Formular zum Hinzufügen Produkts ein/aus
   toggleAddProductForm() {
@@ -63,14 +67,22 @@ export class AddProductComponent implements AfterViewInit{
   saveProduct() {
     console.log('Produkt speichern:', this.newProduct);
 
+ // Aufruf des Services:
+ this.productService.addProduct(this.newProduct).subscribe(
+  (response) => {
+    console.log('Produkt erfolgreich hinzugefügt:', response);
+
     // Formular zurücksetzen & ausblenden
-    this.newProduct = { name: '', amount: null, unit: 'g', expiryDate: ''};
-   //this.showAddProductForm = false;
+    this.newProduct = { name: '', amount: 0, unit: 'g', expiryDate: ''};
+  },
+
+  (error) => {
+    console.error('Fehler beim Hinzufügen des Produkts:', error);
   }
+);
+}
 
   closeForm() {
     this.showAddProductForm = false;
-}
-
-
+  }
 }

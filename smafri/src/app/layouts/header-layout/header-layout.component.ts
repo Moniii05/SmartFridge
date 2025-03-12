@@ -4,6 +4,7 @@ import { AddProductComponent } from '../../product/add-product/add-product.compo
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ListProductComponent } from '../../product/list-product/list-product.component'; 
+// import { HttpClientModule } from '@angular/common/http'; // veraltet
 
 @Component({
   standalone: true,
@@ -11,7 +12,7 @@ import { ListProductComponent } from '../../product/list-product/list-product.co
   imports: [RouterOutlet, RouterLink, AddProductComponent, FormsModule, CommonModule, ListProductComponent],
   template: `
     <div class="header">
-      <img src="assets/kühlschrank-no-background.png" alt="fridge" style="width:500px" />
+      <img src="assets/kühlschrank-no-background.png" alt="fridge" style="width:450px" />
       <div class="text-container">
         <h1>SmartFridge</h1>
         <div class="button-container">

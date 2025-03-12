@@ -1,7 +1,7 @@
 /* Produktliste-Sektion */
 .product-list-section {
-    margin-top: 20px;
-    padding: 20px;
+    margin-top: 15px;
+    padding: 15px;
     font-family: 'Roboto', sans-serif;
   }
   
@@ -9,7 +9,7 @@
   .product-list-section h2 {
     font-size: 2rem;
     color: #0c6ee6;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif; 
     margin-bottom: 10px;
   }
   

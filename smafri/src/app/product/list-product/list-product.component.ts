@@ -28,16 +28,33 @@ export class ListProductComponent {
 
  // Suchbegriff für Filterung (optional)
  searchTerm: string = '';
+//
+ sortOption: string = 'alphabetisch';
 
  // Getter für gefilterte Produkte
  get filteredProducts(): Product[] {
-   if (!this.searchTerm) {
-     return this.products;
-   }
-   const term = this.searchTerm.toLowerCase();
-   return this.products.filter(product =>
-     product.name.toLowerCase().includes(term)
-   );
+  let filtered = this.products;
+  if (this.searchTerm) {
+    const term = this.searchTerm.toLowerCase();
+    filtered = filtered.filter(product =>
+      product.name.toLowerCase().includes(term)
+    );
+  }
+  return filtered.sort((a, b) => {
+    switch (this.sortOption) {
+      case 'alphabetisch':
+        return a.name.localeCompare(b.name);
+      case 'mengeAufwaerts':
+        return a.amount - b.amount;
+      case 'mengeAbwaerts':
+        return b.amount - a.amount;
+      case 'verfallsdatumNah':
+        // Bei ISO-Datumsstrings reicht ein stringbasierter Vergleich oft aus.
+        return a.expiryDate.localeCompare(b.expiryDate);
+      default:
+        return 0;
+    }
+ });
  }
 
  // Referenz zum scrollbaren Container

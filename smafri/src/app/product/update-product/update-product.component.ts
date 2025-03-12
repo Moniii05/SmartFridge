@@ -1,38 +1,44 @@
-import { Component} from '@angular/core';
+import { Component,OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+
 
 import{AfterViewInit, ViewChild, ElementRef} from '@angular/core';
 
 import { RouterLink } from '@angular/router';
 
+// importiere service 
+import { ProductService, Product } from '../product.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
-
-interface Product {
+/* interface Product {
   id:number;
   name:string;
   amount:number;
   unit:string;
   expiryDate:string;
-}
+} */
 
 @Component({
   selector: 'app-update-product',
   standalone: true,
-  imports: [CommonModule,FormsModule,RouterLink],
+  imports: [CommonModule,FormsModule,RouterLink,RouterModule],
   templateUrl: './update-product.component.html',
   styleUrls: ['./update-product.component.css']
 })
-export class UpdateProductComponent implements AfterViewInit {
-  products: Product[] = [
+export class UpdateProductComponent implements AfterViewInit, OnInit {
+  product!: Product;
+  products: Product[] = [];
+
+  selectedProduct: Product = { id: '0', name: '', amount: 0, unit: '', expiryDate: '' };
+  //products: Product[] = [
     //  Probe‑Daten :
-    { id: 1, name: 'Gurke', amount: 3, unit: 'Stück', expiryDate: '2025-12-31' },
-    { id: 2, name: 'Tomate', amount: 5, unit: 'Stück', expiryDate: '2025-11-30' },
+   // { id: 1, name: 'Gurke', amount: 3, unit: 'Stück', expiryDate: '2025-12-31' },
+    //{ id: 2, name: 'Tomate', amount: 5, unit: 'Stück', expiryDate: '2025-11-30' },
     // ...
-  ];
- 
- constructor() {}
+ // ];
 
  // Private Variable und Setter für showUpdateForm:
  private _showUpdateForm = false;
@@ -53,14 +59,49 @@ export class UpdateProductComponent implements AfterViewInit {
    }
  }
 
- selectedProduct: Product = { id: 0, name: '', amount: 0, unit: '', expiryDate: '' };
+// selectedProduct: Product = { id: 0, name: '', amount: 0, unit: '', expiryDate: '' };
 
   // Für Drag-and-Drop: Referenz auf das draggabare Formular-Element
   @ViewChild('draggable') draggable!: ElementRef;
 
+  constructor(
+    public route: ActivatedRoute,
+    public router: Router,
+    public productService: ProductService
+  ) {}
+
+  ngOnInit(): void {
+    // Hole die Produkt-ID aus der URL (z.B. /update-product/6)
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.productService.getProductById(id).subscribe({
+        next: (data: Product) => {
+          this.product = data;
+          // Vorbefüllen des Formulars
+          this.selectedProduct = { ...data };
+        },
+        error: (err: HttpErrorResponse) => {
+          console.error('Fehler beim Laden des Produkts:', err);
+        }
+      });
+    } else {
+     // console.warn('Keine Produkt-ID angegeben. Update nicht möglich.');
+     // this.router.navigate(['/']);
+      // Übersicht-Modus: Alle Produkte laden
+    this.productService.getProducts().subscribe({
+      next: (data: Product[]) => {
+        this.products = data;
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error('Fehler beim Laden der Produkte:', err);
+      }
+    });
+    }
+  }
+
   
   // Da das Formular erst später erscheint, braucht ngAfterViewInit hier nichts weiter zu tun
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     // Bei Add-Formular war kein Problem, da showAddProductForm true war
     // Hier wird Draggable-Initialisierung über Setter von showUpdateForm ausgeführt
   }
@@ -78,7 +119,19 @@ export class UpdateProductComponent implements AfterViewInit {
  
 updateProduct() {
   console.log('Produkt wurde aktualisiert:', this.selectedProduct);
-  this.showUpdateForm = false;
+  if (this.selectedProduct && this.selectedProduct.id) {
+    this.productService.updateProduct(this.selectedProduct).subscribe({
+      next: (updatedProduct: Product) => {
+        console.log('Produkt erfolgreich aktualisiert:', updatedProduct);
+        this.showUpdateForm = false;
+        // Optionale Navigation: Zurück zur Hauptseite oder zur Produktliste
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        console.error('Fehler beim Aktualisieren des Produkts:', err);
+      }
+    });
+  }
 }
 
 // Drag-and-Drop-Funktion (kopiert & angepasst von Add-Product-Code)
