@@ -12,15 +12,6 @@ import { RouterLink } from '@angular/router';
 import { ProductService, Product } from '../product.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
-
-/* interface Product {
-  id:number;
-  name:string;
-  amount:number;
-  unit:string;
-  expiryDate:string;
-} */
-
 @Component({
   selector: 'app-update-product',
   standalone: true,
@@ -32,13 +23,9 @@ export class UpdateProductComponent implements AfterViewInit, OnInit {
   product!: Product;
   products: Product[] = [];
 
-  selectedProduct: Product = { id: '0', name: '', amount: 0, unit: '', expiryDate: '' };
-  //products: Product[] = [
-    //  Probe‑Daten :
-   // { id: 1, name: 'Gurke', amount: 3, unit: 'Stück', expiryDate: '2025-12-31' },
-    //{ id: 2, name: 'Tomate', amount: 5, unit: 'Stück', expiryDate: '2025-11-30' },
-    // ...
- // ];
+  selectedProduct: Product = { _id: '0', name: '', amount: 0, unit: '', expiryDate: '' };
+
+  searchTerm: string = '';
 
  // Private Variable und Setter für showUpdateForm:
  private _showUpdateForm = false;
@@ -58,8 +45,6 @@ export class UpdateProductComponent implements AfterViewInit, OnInit {
      }, 0);
    }
  }
-
-// selectedProduct: Product = { id: 0, name: '', amount: 0, unit: '', expiryDate: '' };
 
   // Für Drag-and-Drop: Referenz auf das draggabare Formular-Element
   @ViewChild('draggable') draggable!: ElementRef;
@@ -85,9 +70,6 @@ export class UpdateProductComponent implements AfterViewInit, OnInit {
         }
       });
     } else {
-     // console.warn('Keine Produkt-ID angegeben. Update nicht möglich.');
-     // this.router.navigate(['/']);
-      // Übersicht-Modus: Alle Produkte laden
     this.productService.getProducts().subscribe({
       next: (data: Product[]) => {
         this.products = data;
@@ -101,10 +83,15 @@ export class UpdateProductComponent implements AfterViewInit, OnInit {
 
   
   // Da das Formular erst später erscheint, braucht ngAfterViewInit hier nichts weiter zu tun
-  ngAfterViewInit(): void {
-    // Bei Add-Formular war kein Problem, da showAddProductForm true war
-    // Hier wird Draggable-Initialisierung über Setter von showUpdateForm ausgeführt
-  }
+  ngAfterViewInit(): void { }
+
+  // NEU: Getter für gefilterte Produktliste
+get filteredProducts(): Product[] {
+  const term = this.searchTerm.toLowerCase();
+  return this.products.filter(product =>
+    product.name.toLowerCase().includes(term)
+  );
+}
 
  editProduct(product: Product) {
   console.log("Produkt zum Bearbeiten:", product);
@@ -117,15 +104,15 @@ export class UpdateProductComponent implements AfterViewInit, OnInit {
    this.showUpdateForm = false;
  }
  
+ isFormVisible: boolean = true;
 updateProduct() {
   console.log('Produkt wurde aktualisiert:', this.selectedProduct);
-  if (this.selectedProduct && this.selectedProduct.id) {
+  if (this.selectedProduct && this.selectedProduct._id) {
     this.productService.updateProduct(this.selectedProduct).subscribe({
       next: (updatedProduct: Product) => {
         console.log('Produkt erfolgreich aktualisiert:', updatedProduct);
         this.showUpdateForm = false;
-        // Optionale Navigation: Zurück zur Hauptseite oder zur Produktliste
-        this.router.navigate(['/']);
+        this.isFormVisible = false; 
       },
       error: (err) => {
         console.error('Fehler beim Aktualisieren des Produkts:', err);

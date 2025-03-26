@@ -8,8 +8,8 @@ import { routes } from './app/app.routes';
 import { provideHttpClient } from '@angular/common/http';
 
 // übung 
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './app/in-memory-data.service';
+//import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+// ncht mehr notwendig: import { InMemoryDataService } from './app/in-memory-data.service';
 // ab angu 19
 import { importProvidersFrom } from '@angular/core';
 
@@ -18,7 +18,7 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes),
     provideHttpClient(), // service 
     //ab angu 19
-   importProvidersFrom(InMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 500 }))
+   //importProvidersFrom(InMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 500 }))
   ]
   //davor importProviders... hier 
 }).catch(err => console.error(err));

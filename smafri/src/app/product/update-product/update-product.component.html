@@ -1,36 +1,134 @@
-<!-- Oberer Header-Bereich mit Überschrift (links) und Zurück-Button (rechts) -->
+
+
+
+<div class="update-header d-flex justify-content-between align-items-center bg-light p-3">
+  <h2 class="text-primary m-0">Produkte aktualisieren</h2>
+  <button class="btn btn-outline-primary" routerLink="/">← Zurück</button>
+</div>
+
+<!-- 🔎 Suchfeld -->
+<div class="search-container my-3 mx-3">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Produkt suchen..."
+    [(ngModel)]="searchTerm"
+  />
+</div>
+
+<!-- Übersicht: Liste aller Produkte -->
+<div *ngIf="!this.route.snapshot.paramMap.get('id')" class="product-container px-3 pb-3">
+  <div
+    class="product-card card shadow-sm p-3 mb-3"
+    *ngFor="let product of filteredProducts"
+    (click)="editProduct(product)"
+  >
+    <div class="card-body">
+      <h5 class="card-title fw-bold fs-5">{{ product.name }}</h5> <!-- Größer & fett -->
+      <p class="card-text mb-1">
+        Menge: {{ product.amount }} {{ product.unit }}
+      </p>
+      <p class="card-text mb-0">
+        Ablaufdatum: {{ product.expiryDate }}
+      </p>
+      <div class="hover-arrow text-end text-primary">➔</div>
+    </div>
+  </div>
+</div>
+
+<!-- 📝 Formular-Overlay (nur wenn showUpdateForm true) -->
+<div *ngIf="showUpdateForm" class="overlay">
+  <div #draggable class="update-form card shadow-sm p-3">
+    <div class="form-header bg-primary text-white d-flex justify-content-between align-items-center px-3 py-2 rounded-top" id="drag-handle">
+      <h4 class="mb-0">⬆ Zieh mich!</h4>
+      <button class="btn btn-sm btn-light" (click)="closeUpdateForm()">✖</button>
+    </div>
+
+    <div class="p-3">
+      <div class="mb-3">
+        <label class="form-label fw-bold">Produktname</label>
+        <input type="text" class="form-control" [(ngModel)]="selectedProduct.name" required />
+      </div>
+
+      <div class="row">
+        <div class="col-6 mb-3">
+          <label class="form-label fw-bold">Menge</label>
+          <input type="number" class="form-control" [(ngModel)]="selectedProduct.amount" required />
+        </div>
+        <div class="col-6 mb-3">
+          <label class="form-label fw-bold">Einheit</label>
+          <select class="form-select" [(ngModel)]="selectedProduct.unit" required>
+            <option value="g">Gramm (g)</option>
+            <option value="ml">Milliliter (ml)</option>
+            <option value="Stück">Stück</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">Verfallsdatum</label>
+        <input type="date" class="form-control" [(ngModel)]="selectedProduct.expiryDate" required />
+      </div>
+
+      <button class="btn btn-success w-100" (click)="updateProduct()">Speichern</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- Oberer Header-Bereich mit Überschrift (links) und Zurück-Button (rechts) 
 <div class="update-header">
   <h2>Produkte aktualisieren</h2>
   <button class="back-btn" routerLink="/" title="Zurück">← Zurück</button>
 </div>
 
-<!-- Übersicht: Liste aller Produkte (nur wenn KEINE ID in der URL ist) -->
+<div class="search-container">
+  <input
+    type="text"
+    placeholder="Produkt suchen..."
+    [(ngModel)]="searchTerm"
+  />
+</div>
+
+<!-- Übersicht: Liste aller Produkte (nur wenn KEINE ID in der URL ist) 
 <div *ngIf="!this.route.snapshot.paramMap.get('id')">
 <div class="product-container">
-    <div class="product-card" *ngFor="let product of products" (click)="editProduct(product)"> 
-    <!--   <div class="product-card" *ngIf="selectedProduct" (click)="editProduct(product)">  -->
-   <!-- <div class="product-details" *ngIf="selectedProduct"> -->
+   
+      <div
+      class="product-card"
+      *ngFor="let product of filteredProducts"
+      (click)="editProduct(product)"
+    >
+
       <div class="card-content">
           <h3>{{ product.name }}</h3>
           <p>Menge: {{ product.amount }} {{ product.unit }}</p>
           <p>Ablaufdatum: {{ product.expiryDate }}</p>
         </div>
-        <!-- Pfeil, der beim Hover eingeblendet wird -->
+        <!-- Pfeil, der beim Hover eingeblendet wird 
         <div class="hover-arrow">➔</div>
       </div>
 </div>
 
-<!-- Formular wird als Overlay angezeigt, nur wenn showUpdateForm true -->
+<!-- Formular wird als Overlay angezeigt, nur wenn showUpdateForm true 
 <div *ngIf="showUpdateForm" class="overlay">
     <div #draggable class="update-form">
-   <!-- <div class="update-form"> -->
+   <!-- <div class="update-form"> 
     <div class="form-header" id="drag-handle">
       <h3>⬆ Zieh mich!</h3>
       <button class="close-btn" (click)="closeUpdateForm()">✖</button>
 </div>
 
 
-      <!-- Formularfelder, mit ngModel an selectedProduct gebunden -->
+      <!-- Formularfelder, mit ngModel an selectedProduct gebunden 
       <label>Produktname:
         <input type="text" [(ngModel)]="selectedProduct.name" required />
       </label>
@@ -54,3 +152,4 @@
       <button (click)="updateProduct()">Speichern</button>
     </div>
  
+<!--  <div class="product-card" *ngFor="let product of products" (click)="editProduct(product)"> -->

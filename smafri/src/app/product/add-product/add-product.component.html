@@ -1,32 +1,70 @@
-<!-- Eingabeformular, das angezeigt wird, wenn showAddProductForm true ist -->
-<!-- <div *ngIf="showAddProductForm" class="product-form">
-    <label>
-      Produktname:
-      <input type="text" placeholder="Produktname" [(ngModel)]="newProduct.name" />
-    </label>
-    <label>
-      Menge (g oder Portionen):
-      <input type="number" placeholder="Menge" [(ngModel)]="newProduct.amount" />
-    </label>
-    <button (click)="saveProduct()">Speichern</button>
-  </div> -->
+<div class="product-form card shadow-sm p-3" cdkDrag #dialog>
 
-  <!-- damit Produkt hinzufügen Formular verschiebbar -->
-  <div *ngIf="showAddProductForm" #draggable class="product-form" id="draggable">
-    
-    <!-- <div id="drag-handle">⬆ Zieh mich!</div> -->
-
-    <div class="form-header" id="drag-handle">
-      <h3>⬆ Zieh mich!</h3>
-      <button class="close-btn" (click)="closeForm()">✖</button>
+  <!-- 🟦 Drag-Header -->
+  <div class="form-header bg-primary text-white d-flex justify-content-between align-items-center px-3 py-2 rounded-top" cdkDragHandle>
+    <h4 class="mb-0">⬆ Zieh mich!</h4> <!-- Etwas größer gemacht -->
+    <button class="btn btn-sm btn-light" (click)="closeForm()">✖</button>
   </div>
+
+  <!-- 🧾 Formularfelder -->
+  <form class="mt-3">
+    <div class="mb-3">
+      <label class="form-label fw-bold">Produktname:</label>
+      <input type="text" class="form-control" placeholder="Produktname" [(ngModel)]="newProduct.name" name="name" required />
+    </div>
+
+    <div class="row">
+      <div class="col-6 mb-3">
+        <label class="form-label fw-bold">Menge:</label>
+        <input type="number" class="form-control" placeholder="Menge" [(ngModel)]="newProduct.amount" name="amount" required />
+      </div>
+      <div class="col-6 mb-3">
+        <label class="form-label fw-bold">Einheit:</label>
+        <select class="form-select" [(ngModel)]="newProduct.unit" name="unit">
+          <option value="g">Gramm (g)</option>
+          <option value="ml">Milliliter (ml)</option>
+          <option value="Stück">Stück</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-bold">Verfallsdatum:</label>
+      <input type="date" class="form-control" [(ngModel)]="newProduct.expiryDate" name="expiryDate" required />
+    </div>
+
+    <button class="btn btn-primary w-100" (click)="saveProduct()">Speichern</button>
+  </form>
+
+  <!-- Ghost-Kopie deaktiviert -->
+  <ng-template cdkDragPreview>
+    <div style="display: none;"></div>
+  </ng-template>
+</div>
+
+
+
+
+  <!-- damit Produkt hinzufügen Formular verschiebbar showAddProductForm
+   <!-- Layout von css product-form, cdk macht verschiebbar 
+ <!-- <div *ngIf="showAddProductForm" > 
+    <div class="product-form" cdkDrag #dialog >  
+
+    <!--gezielt header dient somit als "Griff",  (mousedown)="$event.stopPropagation()" 
+   <div class="form-header" cdkDragHandle> 
+      <h3>⬆ Zieh mich!</h3>
+      <button class="close-btn" 
+    
+      (click)="closeForm()">✖</button>     
+  </div>
+
 
 
     <label> Produktname:
       <input type="text" placeholder="Produktname" [(ngModel)]="newProduct.name" required />
     </label>
 
-    <div class="form-row">
+    <div class="form-row"> 
     <label> Menge:
       <input type="number" placeholder="Menge" [(ngModel)]="newProduct.amount" required />
     </label>
@@ -46,5 +84,12 @@
     </label>
 
     <button (click)="saveProduct()">Speichern</button>
-  </div>
+
+        <!-- Leere Drag-Vorschau: verhindert die Standardvorschau (Klon) 
+        <ng-template cdkDragPreview>
+          <div style="display: none;"></div>
+        </ng-template>
+
+   </div>
+  -->
   

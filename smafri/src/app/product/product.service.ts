@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http'; // hinzufügen
 import { Observable } from 'rxjs';
 
 export interface Product {
-  id?: string; // ? soll optional machen 
+  _id?: string; // ? soll optional machen , _ für mongo
   name: string;
   amount: number; 
   unit: string;
@@ -31,7 +31,7 @@ addProduct(product: Product): Observable<Product> {
 
 // Update an existing product
 updateProduct(product: Product): Observable<Product> {
-  const url = `${this.apiUrl}/${product.id}`;
+  const url = `${this.apiUrl}/${product._id}`;
   return this.http.put<Product>(url, product);
 }
 

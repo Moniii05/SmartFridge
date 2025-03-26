@@ -1,3 +1,6 @@
+/*
+! nciht merh notwendig !
+
 import { Injectable } from '@angular/core';
 
 //hinzufügen 
@@ -24,6 +27,9 @@ export class InMemoryDataService implements InMemoryDbService {
    // Wenn ein Produkt keine ID hat, wird 0 verwendet
    const newId = Math.max(...products.map(product => +(product.id ?? 0))) + 1;
    return String(newId);
-}
+} 
 
-}
+}   
+
+
+*/

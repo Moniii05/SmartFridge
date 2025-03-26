@@ -1,7 +1,43 @@
+<!-- <app-list-product></app-list-product>  -->
 
- <app-list-product></app-list-product>
+ <!-- <app-add-product 
+   *ngIf="productFormZustandService.showAddProductForm"
+   (closeClicked)="productFormZustandService.closeForm()"
+ ></app-add-product> 
+ 
+ <router-outlet></router-outlet> 
+ -->
 
-  <router-outlet></router-outlet>
+ <div class="header">
+   <img src="assets/kühlschrank-no-background.png" alt="fridge" style="width:450px" />
+   <div class="text-container">
+     <h1>SmartFridge</h1>
+     <div class="button-container">
+       <!-- Toggle-Button für Produkt hinzufügen -->
+       <button (click)="toggleAddProductForm()">Produkt hinzufügen</button>
+   
+       <!-- Button für Produkt aktualisieren -->
+       <button routerLink="/update-product">Produkt aktualisieren</button>
+       <button routerLink="/delete-product">Produkt löschen</button>
+
+     </div>
+     <!-- Formular wird nur angezeigt, wenn showAddProductForm true ist -->
+     <!-- <app-add-product *ngIf="productFormZustandService.showAddProductForm"></app-add-product> -->
+      <app-add-product 
+      *ngIf="productFormZustandService.showAddProductForm"
+      (productAdded)="loadProducts()"
+      (closeClicked)="logClose()"
+      ></app-add-product>
+     
+
+   </div>
+ </div>
+ <app-list-product [products]="products"></app-list-product>
+
+ <!-- <app-list-product></app-list-product> -->
+ 
+ <router-outlet></router-outlet>
+
   
   
   

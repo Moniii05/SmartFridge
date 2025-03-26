@@ -1,69 +1,75 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // Importiere FormsModule für ngModel
-import { CommonModule } from '@angular/common'; // Importiere CommonModule für ngIf und andere Direktiven
-import { ElementRef } from '@angular/core';
-import { AfterViewInit } from '@angular/core';
-import { ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ViewChild, ElementRef } from '@angular/core';
+import { FormsModule } from '@angular/forms'; // für [(ngModel)]
+import { CommonModule } from '@angular/common'; // für ngIf,..
 
 // Importiere Service 
 import { ProductService, Product } from '../product.service';
 
+import {Output, EventEmitter} from '@angular/core'; // damit anzeige zeitgleich aktualisiert
+
+import { ProductFormZustandService } from '../../product-form-zustand.service'; // zustand
+
+// hiermit anstatt timer und so, weil fkt nicht 
+// damit drag funktioniert 
+import { DragDropModule} from '@angular/cdk/drag-drop';   
+
 @Component({
   selector: 'app-add-product',
   standalone: true, 
-  imports: [FormsModule, CommonModule], // Füge FormsModule hier hinzu
+  imports: [FormsModule, 
+    CommonModule,
+     DragDropModule, 
+    ], 
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.css'] // Korrektur: styleUrls statt styleUrl
 })
-export class AddProductComponent implements AfterViewInit{
-  @ViewChild('draggable') draggable!: ElementRef;
+export class AddProductComponent { 
+   // Event ausgelöst bei "speichern" zum Aktualisieren d Anzeige
+  @Output() productAdded = new EventEmitter<void>();
+  @Output() closeClicked = new EventEmitter<void>();
+  
+  // ⬇️ Zugriff auf das Dialog-Element
+  @ViewChild('dialog') dialogRef!: ElementRef<HTMLElement>;
 
-  // Variable, die steuert, ob Formular angezeigt wird
-  showAddProductForm = true;
-
-  // Objekt für neue Produkt
+  // Objekt für neue Produkt (ng-Model binding)
   newProduct: Product = { name: '', amount: 0, unit: 'g', expiryDate: '' };
+  
+  // Injektion ProductService in Konstruktor 
+constructor(
+  private productService: ProductService,
+  public productFormZustandService: ProductFormZustandService  // zustand
+) {}
 
-// Injektion ProductService in Konstruktor (direkt nach Imports)
-constructor(private productService: ProductService) {}
 
-  // Schaltet Formular zum Hinzufügen Produkts ein/aus
-  toggleAddProductForm() {
-    this.showAddProductForm = !this.showAddProductForm;
-    console.log('showAddProductForm:', this.showAddProductForm);  // Debugging: Überprüfen, ob der Wert richtig umgeschaltet wird
-    alert(`Formular anzeigen: ${this.showAddProductForm}`);
+
+  // Zustand von formular holen aus service über getter
+  //get showAddProductForm(): boolean {
+  //  return this.productFormZustandService.showAddProductForm;
+  //}
+
+  
+  saveProduct() {
+    this.productService.addProduct(this.newProduct).subscribe(() => {
+      this.productAdded.emit();
+      this.newProduct = { name: '', amount: 0, unit: 'g', expiryDate: '' };
+     // this.productFormZustandService.closeForm();
+    });
   }
 
-  ngAfterViewInit() {
-    if (this.draggable) {
-      this.makeDraggable(this.draggable.nativeElement);
-    } else {
-      console.warn('Draggable Element wurde nicht gefunden');
-    }
+  closeForm() {
+    console.log('❌ Komponente: closeForm() wurde ausgelöst');
+    this.closeClicked.emit();
   }
 
+  
 
-  makeDraggable(element: HTMLElement) {
-    let offsetX = 0, offsetY = 0, isDragging = false;
+ 
+}
 
-    const handle = document.getElementById("drag-handle");
-    if (!handle) return;
 
-    handle.onmousedown = (event) => {
-      isDragging = true;
-      offsetX = event.clientX - element.offsetLeft;
-      offsetY = event.clientY - element.offsetTop;
-      document.onmousemove = (e) => {
-        if (isDragging) {
-          element.style.left = e.clientX - offsetX + "px";
-          element.style.top = e.clientY - offsetY + "px";
-        }
-      };
-      document.onmouseup = () => (isDragging = false);
-    };
-  }
 
-  // Speichert neue Produkt
+/*
+// Speichert neue Produkt + form schließen
   saveProduct() {
     console.log('Produkt speichern:', this.newProduct);
 
@@ -72,8 +78,15 @@ constructor(private productService: ProductService) {}
   (response) => {
     console.log('Produkt erfolgreich hinzugefügt:', response);
 
+     // Event, damit ListProductComponent die Daten aktualisiert
+     this.productAdded.emit();  
+
     // Formular zurücksetzen & ausblenden
     this.newProduct = { name: '', amount: 0, unit: 'g', expiryDate: ''};
+   // this.showAddProductForm = false; // Nach dem Speichern schließen
+
+   // Formular schließen über Service
+   //this.productFormZustandService.closeForm();
   },
 
   (error) => {
@@ -83,6 +96,12 @@ constructor(private productService: ProductService) {}
 }
 
   closeForm() {
-    this.showAddProductForm = false;
+    console.log('❌ Komponente: closeForm() wurde ausgelöst');
+    console.log('📤 EventEmitter:', this.closeClicked);
+    console.log('📤 Zustand vom Service (vor):', this.productFormZustandService.showAddProductForm);
+    this.closeClicked.emit(); // Statt direkt im Service!
+    
+
   }
-}
+
+  */

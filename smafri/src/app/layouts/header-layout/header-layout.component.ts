@@ -4,41 +4,61 @@ import { AddProductComponent } from '../../product/add-product/add-product.compo
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ListProductComponent } from '../../product/list-product/list-product.component'; 
+import { Product, ProductService } from '../../product/product.service'; // hinzufügen
+
 // import { HttpClientModule } from '@angular/common/http'; // veraltet
+import { ProductFormZustandService } from '../../product-form-zustand.service';  // für Zustand Form
 
 @Component({
   standalone: true,
   selector: 'app-header-layout',
   imports: [RouterOutlet, RouterLink, AddProductComponent, FormsModule, CommonModule, ListProductComponent],
-  template: `
-    <div class="header">
-      <img src="assets/kühlschrank-no-background.png" alt="fridge" style="width:450px" />
-      <div class="text-container">
-        <h1>SmartFridge</h1>
-        <div class="button-container">
-          <!-- Toggle-Button für Produkt hinzufügen -->
-          <button (click)="toggleAddProductForm()">Produkt hinzufügen</button>
-          <!-- Button für Produkt aktualisieren -->
-          <button routerLink="/update-product">Produkt aktualisieren</button>
-          <button routerLink="/delete-product">Produkt löschen</button>
-
-        </div>
-        <!-- Formular wird nur angezeigt, wenn showAddProductForm true ist -->
-        <app-add-product *ngIf="showAddProductForm"></app-add-product>
-      </div>
-    </div>
-
-    <app-list-product></app-list-product>
-
-    <router-outlet></router-outlet>
-  `,
+  templateUrl: './header-layout.component.html',
   styleUrls: ['./header-layout.component.css']
 })
 export class HeaderLayoutComponent {
-  showAddProductForm = false;
+  //showAddProductForm = false;
+  // 🔹 Zustand für Produktliste
+  products: Product[] = [];
+
+
+  constructor(
+    public productFormZustandService: ProductFormZustandService,
+    private productService: ProductService // 🔸 hinzufügen
+  ) {}
 
   toggleAddProductForm() {
-    this.showAddProductForm = !this.showAddProductForm;
-    console.log('Formular sichtbar:', this.showAddProductForm);
+    // stattdessen, weil show nun in Service gepseichert anstatt Header
+    this.productFormZustandService.toggleForm();
+  }
+
+   // ⬇️ Diese Methode hier neu einfügen
+   logClose() {
+    console.log("Header empfängt Close-Event ✅");
+    this.productFormZustandService.closeForm();
+  }
+
+
+  // 🔹 Wird nach (productAdded) aufgerufen
+  loadProducts() {
+    this.productService.getProducts().subscribe({
+      next: (data) => {
+        console.log('🟢 Produkte neu geladen:', data);
+        this.products = data;
+      },
+      error: (err) => console.error('❌ Fehler beim Laden:', err)
+    });
   }
 }
+
+  
+
+
+
+
+/*
+loadProducts() {
+  // Zugriff auf die Kind-Komponente
+  const list = document.querySelector('app-list-product') as any;
+  if (list?.loadProducts) list.loadProducts(); // Direkt aufrufen
+} */

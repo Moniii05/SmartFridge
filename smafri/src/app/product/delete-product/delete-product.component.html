@@ -1,11 +1,81 @@
-<div class="delete-header">
+<!-- ✅ DELETE PRODUCT COMPONENT HTML mit gleichem Layout wie Update -->
+
+<div class="delete-header d-flex justify-content-between align-items-center bg-light p-3 mb-3">
+    <h2 class="text-primary m-0">Produkt löschen</h2>
+    <button class="btn btn-outline-primary" routerLink="/" title="Zurück">← Zurück</button>
+  </div>
+  
+  <!-- 🔎 Suchfeld -->
+  <div class="search-container my-3 mx-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Suche..."
+      [(ngModel)]="searchTerm"
+    />
+  </div>
+  
+  <!-- Produktliste -->
+  <div class="product-container px-3 pb-3">
+    <div
+      class="product-card card shadow-sm p-3 mb-3"
+      *ngFor="let product of filteredProducts"
+      (click)="confirmDelete(product)"
+      style="background-color: #e7f0fa;"
+    >
+      <div class="card-body">
+        <h5 class="card-title fw-bold fs-5">{{ product.name }}</h5>
+        <p class="card-text mb-2">Menge: {{ product.amount }} {{ product.unit }}</p>
+        <p class="card-text">Ablaufdatum: {{ product.expiryDate }}</p>
+        <div class="hover-arrow text-end text-primary">➔</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Bestätigungs-Overlay -->
+<div *ngIf="showDeleteConfirm" class="overlay">
+    <div class="delete-confirm bg-light shadow rounded p-4 text-center">
+  
+      <!-- 🟦 Header mit größerem Text und X-Button -->
+      <div class="form-header d-flex justify-content-between align-items-center bg-primary text-white px-3 py-2 mb-3">
+        <h4 class="m-0 fw-bold">Sicher löschen?</h4> <!-- ⬅ Größerer Text -->
+        <button class="btn btn-sm btn-light" (click)="closeDeleteConfirm()">✖</button> <!-- ⬅ X statt Strich -->
+      </div>
+  
+      <p class="mb-4">Willst du das Produkt <strong>"{{ selectedProduct.name }}"</strong> wirklich löschen?</p>
+  
+      <!-- 🟥🟦 JA/NEIN-Buttons mit Abstand & Farben -->
+      <div class="d-flex justify-content-center gap-4">
+    
+        <button class="yes-btn" (click)="deleteProduct()">Ja</button>
+        <button class="no-btn" (click)="closeDeleteConfirm()">Nein</button>
+
+      </div>
+      
+    </div>
+  </div>
+  
+
+
+
+
+
+
+<!-- <div class="delete-header">
 <h2>Produkt löschen</h2>
 <button class="back-btn" routerLink="/" title="Zurück">← Zurück</button>
 </div>
 
+<div class="search-container">
+    <input type="text" placeholder="Suche..." [(ngModel)]="searchTerm" />
+  </div>
+
 <div class="product-container">
-  <!-- Jede Produktkarte ruft confirmDelete(product) auf -->
-  <div class="product-card" *ngFor="let product of products" (click)="confirmDelete(product)">
+  <!-- Jede Produktkarte ruft confirmDelete(product) auf 
+  
+   <!-- ERSETZT: Nutzung des Filters 
+<div class="product-card" *ngFor="let product of filteredProducts" (click)="confirmDelete(product)">
+
     <div class="card-content">
       <h3>{{ product.name }}</h3>
       <p>Menge: {{ product.amount }} {{ product.unit }}</p>
@@ -15,7 +85,7 @@
   </div>
 </div>
 
-<!-- Bestätigungs-Overlay: Wird angezeigt, wenn showDeleteConfirm true ist -->
+<!-- Bestätigungs-Overlay: Wird angezeigt, wenn showDeleteConfirm true ist 
 <div *ngIf="showDeleteConfirm" class="overlay">
   <div class="delete-confirm">
     <div class="form-header" id="drag-handle">
@@ -29,4 +99,4 @@
     </div>
   </div>
 </div>
-
+-->

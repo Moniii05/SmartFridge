@@ -1,35 +1,41 @@
-import { Component, ViewChild,ElementRef } from '@angular/core';
+import { Component, ViewChild,ElementRef, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-interface Product {
-  id: number;
-  name: string;
-  amount: number;
-  unit: string;
-  expiryDate: string;
-}
+import { ProductService, Product } from '../product.service';
+import { AddProductComponent } from "../add-product/add-product.component"; // Importiere den Service
 
 @Component({
   standalone: true,
   selector: 'app-list-product',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule, AddProductComponent],
   templateUrl: './list-product.component.html',
   styleUrls: ['./list-product.component.css']
 })
-export class ListProductComponent {
-  products: Product[] = [
-    { id: 1, name: 'Gurke', amount: 3, unit: 'Stück', expiryDate: '2025-12-31' },
-    { id: 2, name: 'Tomate', amount: 5, unit: 'Stück', expiryDate: '2025-11-30' },
-    { id: 3, name: 'Karotte', amount: 7, unit: 'Stück', expiryDate: '2025-10-15' },
-    { id: 4, name: 'Paprika', amount: 4, unit: 'Stück', expiryDate: '2025-09-20' },
-    
-  ];
-
- // Suchbegriff für Filterung (optional)
+export class ListProductComponent implements OnInit {
+  @Input()  products: Product[] = [  ];
+  
+ // Suchbegriff für Filterung 
  searchTerm: string = '';
-//
  sortOption: string = 'alphabetisch';
+
+ constructor(private productService: ProductService) {}
+
+  ngOnInit(): void {
+    this.loadProducts(); // Daten von MongoDB abrufen
+  }
+
+  loadProducts(): void {
+    this.productService.getProducts().subscribe((data) => {
+      this.products = data;
+    });
+  }
+
+  deleteProduct(id: string): void {
+    this.productService.deleteProduct(id).subscribe(() => {
+      this.loadProducts(); // Liste nach dem Löschen aktualisieren
+      //this.products = this.products.filter(product => product._id !== id); 
+    });
+  }
 
  // Getter für gefilterte Produkte
  get filteredProducts(): Product[] {
