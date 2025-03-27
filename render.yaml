@@ -22,4 +22,5 @@ services:
     buildFilter:
       paths:
         - smafri/**
-
+    staticPublishOptions:
+    fallback: index.html
