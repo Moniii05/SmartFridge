@@ -43,6 +43,8 @@
 - **Deployment:** Render (automatisiert via `render.yaml`)
 
 ---
+Chatgpt zum debuggen und hilfestellung, 
+Fehlersuche, weil oftmals zu viel code und wenn man sich nicht sicher ist welche dateien und Stellen miteinandner zusammenhängen
 
 ## 🚀 Projekt lokal starten
 
