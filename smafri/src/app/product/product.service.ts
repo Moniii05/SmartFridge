@@ -19,7 +19,7 @@ export interface Product {
 export class ProductService {
 
   // private baseUrl = 'https://smartfridge-tvaz.onrender.com/products';
-  private apiUrl = `${environment.apiUrl}api/products`;
+  private apiUrl = `${environment.apiUrl}/api/products`;
 
   constructor(private http: HttpClient) { }
 // Get all products
