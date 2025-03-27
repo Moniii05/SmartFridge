@@ -6,7 +6,6 @@ services:
     plan: free
     buildCommand: npm install
     startCommand: cd smafri/backend && node server.js
-    rootDir: smafri/backend
     envVars:
       - key: MONGO_URI
         value: mongodb+srv://monikaphm511:1Wftx8F5vyUst7uX@smartfridge0.2twexph.mongodb.net/smartfridge?retryWrites=true&w=majority&appName=smartfridge0
@@ -14,7 +13,7 @@ services:
         value: production
 
   # === Frontend (Angular Static Hosting) ===
-  - type: static
+  - type: static_site
     name: smartfridge-frontend
     env: static
     buildCommand: npm install && npx ng build --configuration production
