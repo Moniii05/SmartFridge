@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { AddProductComponent } from '../../product/add-product/add-product.component';
 import { FormsModule } from '@angular/forms';
@@ -16,7 +16,7 @@ import { ProductFormZustandService } from '../../product-form-zustand.service'; 
   templateUrl: './header-layout.component.html',
   styleUrls: ['./header-layout.component.css']
 })
-export class HeaderLayoutComponent {
+export class HeaderLayoutComponent implements OnInit {
   //showAddProductForm = false;
   // 🔹 Zustand für Produktliste
   products: Product[] = [];
@@ -26,6 +26,10 @@ export class HeaderLayoutComponent {
     public productFormZustandService: ProductFormZustandService,
     private productService: ProductService // 🔸 hinzufügen
   ) {}
+
+  ngOnInit(): void {
+    this.loadProducts(); // bei Start einmal Produkte laden
+  }
 
   toggleAddProductForm() {
     // stattdessen, weil show nun in Service gepseichert anstatt Header
