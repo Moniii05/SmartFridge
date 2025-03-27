@@ -11,7 +11,7 @@ import { AddProductComponent } from "../add-product/add-product.component"; // I
   templateUrl: './list-product.component.html',
   styleUrls: ['./list-product.component.css']
 })
-export class ListProductComponent implements OnInit {
+export class ListProductComponent   {   //  implements OnInit
   @Input()  products: Product[] = [  ];
   
  // Suchbegriff für Filterung 
@@ -20,9 +20,9 @@ export class ListProductComponent implements OnInit {
 
  constructor(private productService: ProductService) {}
 
-  ngOnInit(): void {
-    this.loadProducts(); // Daten von MongoDB abrufen
-  }
+  //ngOnInit(): void {
+   // this.loadProducts(); // Daten von MongoDB abrufen
+  //}
 
   loadProducts(): void {
     this.productService.getProducts().subscribe((data) => {
