@@ -16,11 +16,10 @@ services:
   # === Frontend (Angular Static Hosting) ===
   - type: web
     name: smartfridge-frontend
-    env: static
-    plan: free
-    rootDir: smafri 
+    env: static 
     buildCommand: npm install && npx ng build --configuration production
-    publishDir: dist/smafri
-    staticPublishOptions:
-      fallback: index.html
+    staticPublishPath: smafri/dist/smafri
+    buildFilter:
+      paths:
+       - smafri/**
 
