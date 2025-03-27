@@ -15,10 +15,10 @@ services:
         value: production
 
 
-
+#nun wieder static_site
 
   # === Frontend (Angular Static Hosting) ===
-  - type: static
+  - type: static_site
     name: smartfridge-frontend
     env: static
     buildCommand: npm install && npx ng build --configuration production
@@ -26,3 +26,4 @@ services:
     staticPublishOptions:
       fallback: index.html
 
+#hoffentlich klappts
