@@ -19,8 +19,7 @@ export interface Product {
 export class ProductService {
 
   // private baseUrl = 'https://smartfridge-tvaz.onrender.com/products';
-  private apiUrl = `${environment.apiUrl}/products`;
-
+  private apiUrl = `${environment.apiUrl}api/products`;
 
   constructor(private http: HttpClient) { }
 // Get all products
@@ -50,6 +49,5 @@ getProductById(id: string): Observable<Product> {
   const url = `${this.apiUrl}/${id}`;
   return this.http.get<Product>(url);
 }
-
 
 }
